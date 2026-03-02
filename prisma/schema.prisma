@@ -1,0 +1,194 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============== AUTH ==============
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+
+  perfil PerfilAlumno?
+}
+
+// ============== DATOS ACADEMICOS ==============
+
+model Departamento {
+  id          String       @id @default(cuid())
+  codigo      String       @unique // DCB, DG, DEI, DEE
+  nombre      String
+  asignaturas Asignatura[]
+}
+
+model Carrera {
+  id       String @id @default(cuid())
+  codigo   String @unique // IIN, IEL, ICM, etc.
+  nombre   String
+  sede     String @default("Asuncion") // Asuncion, Cnel. Oviedo, Villarrica
+
+  enfasis            Enfasis[]
+  asignaturaCarreras AsignaturaCarrera[]
+  mallaCurricular    MallaCurricular[]
+  perfiles           PerfilAlumno[]
+}
+
+model Enfasis {
+  id        String @id @default(cuid())
+  codigo    String // EM, TI, CI, MEC, G, H, T, ASI, PC
+  nombre    String
+  carreraId String
+
+  carrera Carrera @relation(fields: [carreraId], references: [id])
+
+  @@unique([codigo, carreraId])
+}
+
+model PeriodoAcademico {
+  id          String   @id @default(cuid())
+  nombre      String // "Primer Periodo Academico 2026"
+  anho        Int // 2026
+  periodo     Int // 1 o 2
+  fechaInicio DateTime?
+  activo      Boolean  @default(false)
+
+  secciones Seccion[]
+
+  @@unique([anho, periodo])
+}
+
+// ============== MATERIAS Y SECCIONES ==============
+
+model Asignatura {
+  id             String  @id @default(cuid())
+  nombre         String
+  nivel          Int? // 1-10 o null
+  semestre       Int? // 1-10 o null
+  departamentoId String
+  plan           String? // "2006", "2012", etc.
+  soloFinal      Boolean @default(false) // marcador (*)
+  practicaLab    Boolean @default(false) // marcador (**)
+
+  departamento       Departamento       @relation(fields: [departamentoId], references: [id])
+  asignaturaCarreras AsignaturaCarrera[]
+  mallaCurricular    MallaCurricular[]
+
+  @@index([nombre])
+}
+
+model AsignaturaCarrera {
+  id           String @id @default(cuid())
+  asignaturaId String
+  carreraId    String
+  enfasisCodes String @default("") // codigos separados por coma: "CI,EM,MEC,TI"
+
+  asignatura Asignatura @relation(fields: [asignaturaId], references: [id])
+  carrera    Carrera    @relation(fields: [carreraId], references: [id])
+  secciones  Seccion[]
+
+  @@unique([asignaturaId, carreraId])
+  @@index([carreraId])
+}
+
+model Seccion {
+  id                  String @id @default(cuid())
+  asignaturaCarreraId String
+  periodoId           String
+  turno               String // M, T, N
+  seccion             String // MI, MJ, TQ, NA, etc.
+  plataforma          String @default("EDUCA")
+
+  // Profesor
+  profesorTitulo   String @default("")
+  profesorApellido String @default("")
+  profesorNombre   String @default("")
+  profesorEmail    String @default("")
+
+  asignaturaCarrera AsignaturaCarrera @relation(fields: [asignaturaCarreraId], references: [id])
+  periodo           PeriodoAcademico  @relation(fields: [periodoId], references: [id])
+  horarios          HorarioClase[]
+  examenes          Examen[]
+  revisiones        Revision[]
+
+  @@index([periodoId])
+  @@index([turno, seccion])
+}
+
+model HorarioClase {
+  id           String  @id @default(cuid())
+  seccionId    String
+  dia          String // Lunes, Martes, Miercoles, Jueves, Viernes, Sabado
+  horaInicio   String // "08:00"
+  horaFin      String // "10:15"
+  aula         String  @default("") // A55, Lab HPC, etc.
+  fechasSabado String? // fechas especificas para turno noche
+
+  seccion Seccion @relation(fields: [seccionId], references: [id], onDelete: Cascade)
+
+  @@index([seccionId])
+  @@index([dia])
+}
+
+model Examen {
+  id             String  @id @default(cuid())
+  seccionId      String
+  tipo           String // PARCIAL_1, PARCIAL_2, FINAL_1, FINAL_2
+  fecha          String? // "Lun 13/04/26"
+  hora           String? // "08:00"
+  aula           String?
+  presidenteMesa String?
+  miembro1       String?
+  miembro2       String?
+
+  seccion Seccion @relation(fields: [seccionId], references: [id], onDelete: Cascade)
+
+  @@index([seccionId])
+  @@index([tipo])
+}
+
+model Revision {
+  id        String  @id @default(cuid())
+  seccionId String
+  tipo      String // REVISION_FINAL_1, REVISION_FINAL_2
+  fecha     String?
+  hora      String?
+
+  seccion Seccion @relation(fields: [seccionId], references: [id], onDelete: Cascade)
+
+  @@index([seccionId])
+}
+
+// ============== MALLA CURRICULAR (futuro) ==============
+
+model MallaCurricular {
+  id             String @id @default(cuid())
+  carreraId      String
+  semestre       Int
+  asignaturaId   String
+  prerrequisitos String @default("[]") // JSON array de codigos
+
+  carrera    Carrera    @relation(fields: [carreraId], references: [id])
+  asignatura Asignatura @relation(fields: [asignaturaId], references: [id])
+
+  @@unique([carreraId, asignaturaId])
+}
+
+// ============== PERFIL DEL ALUMNO ==============
+
+model PerfilAlumno {
+  id                String @id @default(cuid())
+  userId            String @unique
+  carreraId         String
+  materiasAprobadas String @default("[]") // JSON array de IDs
+  semestreActual    Int    @default(1)
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  carrera Carrera @relation(fields: [carreraId], references: [id])
+}
