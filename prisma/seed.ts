@@ -1,4 +1,9 @@
 import { PrismaClient } from "@prisma/client";
+import { hash } from "bcryptjs";
+import { readFileSync } from "fs";
+import { join } from "path";
+import { parseExcelBuffer } from "../src/lib/excel-parser";
+import { saveParseResultToDb } from "../src/lib/excel-to-db";
 
 const prisma = new PrismaClient();
 
@@ -89,7 +94,45 @@ async function main() {
     },
   });
 
-  console.log("Seed completado: departamentos, carreras, enfasis y periodo academico.");
+  // Usuario de prueba
+  const testPassword = await hash("123456", 12);
+  await prisma.user.upsert({
+    where: { documento: "12345678" },
+    update: {},
+    create: {
+      documento: "12345678",
+      password: testPassword,
+      name: "Estudiante Demo",
+    },
+  });
+
+  console.log("Seed base completado: departamentos, carreras, enfasis, periodo y usuario de prueba.");
+  console.log("Usuario de prueba -> Documento: 12345678 | Contrasena: 123456");
+
+  // Cargar datos del Excel del periodo 2026-1
+  const excelPath = join(__dirname, "..", "data", "excel", "Horario de clases y examenes Primer Periodo 2026 version web 27022026.xlsx");
+  try {
+    const buffer = readFileSync(excelPath);
+    console.log("\nCargando Excel del Primer Periodo 2026...");
+    const parseResult = parseExcelBuffer(buffer.buffer as ArrayBuffer);
+    console.log(`  Hojas encontradas: ${parseResult.sheetNames.join(", ")}`);
+    console.log(`  Carreras parseadas: ${parseResult.carreras.length}`);
+    console.log(`  Filas totales: ${parseResult.totalRows}`);
+
+    const dbResult = await saveParseResultToDb(parseResult.carreras);
+    console.log(`\nDatos del periodo cargados:`);
+    console.log(`  Asignaturas: ${dbResult.asignaturasCreadas}`);
+    console.log(`  Secciones: ${dbResult.seccionesCreadas}`);
+    console.log(`  Horarios de clase: ${dbResult.horariosCreados}`);
+    console.log(`  Examenes: ${dbResult.examenesCreados}`);
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") {
+      console.log("\nExcel no encontrado en data/excel/. Omitiendo carga de horarios.");
+      console.log("Puedes cargar los datos luego desde la pagina 'Subir Excel'.");
+    } else {
+      throw err;
+    }
+  }
 }
 
 main()

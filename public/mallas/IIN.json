@@ -1,0 +1,451 @@
+{
+  "carrera": "IIN",
+  "nombre": "Ingenieria en Informatica",
+  "plan": "2008",
+  "campus": "San Lorenzo - Paraguay",
+  "observaciones": [
+    "Carga academica recomendada: entre 32 y 54 creditos por semestre",
+    "Electiva 1: requiere 55% de creditos aprobados",
+    "Electivas 2 y 3: requieren 70% de creditos aprobados",
+    "Electivas 4 y 5: requieren 70% de creditos aprobados + 300 horas de pasantias"
+  ],
+  "semestres": [
+    {
+      "numero": 1,
+      "materias": [
+        {
+          "codigo": "1.1",
+          "nombre": "Fundamentos de Matematicas",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "1.2",
+          "nombre": "Matematica Discreta",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "1.3",
+          "nombre": "Organizacion y Arquitectura de Computadoras I",
+          "tipo": "Tecnologica",
+          "creditos": 5,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "1.4",
+          "nombre": "Algoritmos y Estructuras de Datos",
+          "tipo": "Tecnologica",
+          "creditos": 6,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "1.5",
+          "nombre": "Expresion Oral y Escrita",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "1.6",
+          "nombre": "Emprendedurismo",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "materias": [
+        {
+          "codigo": "2.1",
+          "nombre": "Algebra Lineal",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["1.1", "1.2"]
+        },
+        {
+          "codigo": "2.2",
+          "nombre": "Calculo I",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["1.1"]
+        },
+        {
+          "codigo": "2.3",
+          "nombre": "Organizacion y Arquitectura de Computadoras II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["1.3"]
+        },
+        {
+          "codigo": "2.4",
+          "nombre": "Lenguajes de Programacion I",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["1.2", "1.4"]
+        },
+        {
+          "codigo": "2.5",
+          "nombre": "Algoritmos y Estructuras de Datos II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["1.4"]
+        },
+        {
+          "codigo": "2.6",
+          "nombre": "Ingles",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "materias": [
+        {
+          "codigo": "3.1",
+          "nombre": "Logica para Ciencias de la Computacion",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["1.2", "2.5"]
+        },
+        {
+          "codigo": "3.2",
+          "nombre": "Calculo II",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["2.2"]
+        },
+        {
+          "codigo": "3.3",
+          "nombre": "Fisica 1",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["1.1"]
+        },
+        {
+          "codigo": "3.4",
+          "nombre": "Lenguajes de Programacion II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["2.4", "2.5"]
+        },
+        {
+          "codigo": "3.5",
+          "nombre": "Algoritmos y Estructuras de Datos III",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["2.5"]
+        },
+        {
+          "codigo": "3.6",
+          "nombre": "Contabilidad",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "materias": [
+        {
+          "codigo": "4.1",
+          "nombre": "Probabilidades y Estadistica",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["1.2", "3.2"]
+        },
+        {
+          "codigo": "4.2",
+          "nombre": "Calculo III",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["3.2"]
+        },
+        {
+          "codigo": "4.3",
+          "nombre": "Fisica 2",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["3.3"]
+        },
+        {
+          "codigo": "4.4",
+          "nombre": "Redes de Computadoras I",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["1.3", "2.5"]
+        },
+        {
+          "codigo": "4.5",
+          "nombre": "Sistemas Operativos",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["2.3", "3.5"]
+        },
+        {
+          "codigo": "4.6",
+          "nombre": "Economia y Finanzas",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        }
+      ]
+    },
+    {
+      "numero": 5,
+      "materias": [
+        {
+          "codigo": "5.1",
+          "nombre": "Fisica 3",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["4.3"]
+        },
+        {
+          "codigo": "5.2",
+          "nombre": "Investigacion de Operaciones I",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["2.1", "3.2"]
+        },
+        {
+          "codigo": "5.3",
+          "nombre": "Redes de Computadoras II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["2.3", "4.3", "4.4"]
+        },
+        {
+          "codigo": "5.4",
+          "nombre": "Lenguajes de Programacion III",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["3.4", "4.5"]
+        },
+        {
+          "codigo": "5.5",
+          "nombre": "Sistemas Distribuidos",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["3.4", "4.4", "4.5"]
+        },
+        {
+          "codigo": "5.6",
+          "nombre": "Tecnicas de Organizacion y Metodos",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        }
+      ]
+    },
+    {
+      "numero": 6,
+      "materias": [
+        {
+          "codigo": "6.1",
+          "nombre": "Metodos Numericos",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["4.2"]
+        },
+        {
+          "codigo": "6.2",
+          "nombre": "Estructura de los Lenguajes",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["5.4"]
+        },
+        {
+          "codigo": "6.3",
+          "nombre": "Ingenieria de Software I",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["3.4"]
+        },
+        {
+          "codigo": "6.4",
+          "nombre": "Base de Datos I",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["3.1", "3.4"]
+        },
+        {
+          "codigo": "6.5",
+          "nombre": "Fisica 4",
+          "tipo": "Basica",
+          "creditos": 5,
+          "prerrequisitos": ["4.3"]
+        }
+      ]
+    },
+    {
+      "numero": 7,
+      "materias": [
+        {
+          "codigo": "7.1",
+          "nombre": "Matematica Aplicada",
+          "tipo": "Basica",
+          "creditos": 7,
+          "prerrequisitos": ["2.1", "5.1"]
+        },
+        {
+          "codigo": "7.2",
+          "nombre": "Investigacion de Operaciones II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["5.2", "6.1"]
+        },
+        {
+          "codigo": "7.3",
+          "nombre": "Ingenieria de Software II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["6.3"]
+        },
+        {
+          "codigo": "7.4",
+          "nombre": "Optativa 1",
+          "tipo": "Complementaria",
+          "creditos": 4,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "7.5",
+          "nombre": "Electiva 1",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "55% de creditos aprobados"
+        }
+      ]
+    },
+    {
+      "numero": 8,
+      "materias": [
+        {
+          "codigo": "8.1",
+          "nombre": "Ingenieria de Software III",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["7.3"]
+        },
+        {
+          "codigo": "8.2",
+          "nombre": "Base de Datos II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["6.4"]
+        },
+        {
+          "codigo": "8.3",
+          "nombre": "Optativa 2",
+          "tipo": "Tecnologica",
+          "creditos": 4,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "8.4",
+          "nombre": "Electiva 2",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "70% de creditos aprobados"
+        },
+        {
+          "codigo": "8.5",
+          "nombre": "Electiva 3",
+          "tipo": "Complementaria",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "70% de creditos aprobados"
+        }
+      ]
+    },
+    {
+      "numero": 9,
+      "materias": [
+        {
+          "codigo": "9.1",
+          "nombre": "Gestion de Centro de Computos",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["8.1"]
+        },
+        {
+          "codigo": "9.2",
+          "nombre": "Optativa 3",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": []
+        },
+        {
+          "codigo": "9.3",
+          "nombre": "Electiva 4",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "70% de creditos aprobados + 300 horas de pasantias"
+        },
+        {
+          "codigo": "9.4",
+          "nombre": "Electiva 5",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "70% de creditos aprobados + 300 horas de pasantias"
+        },
+        {
+          "codigo": "9.5",
+          "nombre": "Proyecto Final de Tesis",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "Haber aprobado 85% de creditos"
+        }
+      ]
+    },
+    {
+      "numero": 10,
+      "materias": [
+        {
+          "codigo": "10.1",
+          "nombre": "Diseno de Compiladores",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["6.2", "8.1"]
+        },
+        {
+          "codigo": "10.2",
+          "nombre": "Electiva 6",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "70% de creditos aprobados"
+        },
+        {
+          "codigo": "10.3",
+          "nombre": "Electiva 7",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": [],
+          "requisitoEspecial": "70% de creditos aprobados"
+        },
+        {
+          "codigo": "10.4",
+          "nombre": "Proyecto Final de Tesis II",
+          "tipo": "Tecnologica",
+          "creditos": 7,
+          "prerrequisitos": ["9.5"],
+          "requisitoEspecial": "Haber aprobado 85% de creditos"
+        }
+      ]
+    }
+  ]
+}

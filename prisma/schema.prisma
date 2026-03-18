@@ -11,12 +11,13 @@ datasource db {
 
 model User {
   id        String   @id @default(cuid())
-  email     String   @unique
+  documento String   @unique // Numero de documento/cedula
   password  String
   name      String
   createdAt DateTime @default(now())
 
-  perfil PerfilAlumno?
+  perfil   PerfilAlumno?
+  horarios HorarioGuardado[]
 }
 
 // ============== DATOS ACADEMICOS ==============
@@ -59,7 +60,8 @@ model PeriodoAcademico {
   fechaInicio DateTime?
   activo      Boolean  @default(false)
 
-  secciones Seccion[]
+  secciones         Seccion[]
+  horariosGuardados HorarioGuardado[]
 
   @@unique([anho, periodo])
 }
@@ -178,6 +180,34 @@ model MallaCurricular {
   asignatura Asignatura @relation(fields: [asignaturaId], references: [id])
 
   @@unique([carreraId, asignaturaId])
+}
+
+// ============== HORARIO GUARDADO ==============
+
+model HorarioGuardado {
+  id          String   @id @default(cuid())
+  userId      String
+  periodoId   String
+  carreraCodigo String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user    User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  periodo PeriodoAcademico @relation(fields: [periodoId], references: [id])
+  items   HorarioItem[]
+
+  @@unique([userId, periodoId])
+}
+
+model HorarioItem {
+  id                String @id @default(cuid())
+  horarioGuardadoId String
+  asignaturaId      String // para re-mapear la materia
+  seccionId         String // la seccion elegida
+
+  horarioGuardado HorarioGuardado @relation(fields: [horarioGuardadoId], references: [id], onDelete: Cascade)
+
+  @@index([horarioGuardadoId])
 }
 
 // ============== PERFIL DEL ALUMNO ==============

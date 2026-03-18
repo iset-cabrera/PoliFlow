@@ -4,9 +4,9 @@ import { prisma } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
-    const { name, email, password } = await req.json();
+    const { name, documento, password } = await req.json();
 
-    if (!name || !email || !password) {
+    if (!name || !documento || !password) {
       return NextResponse.json(
         { error: "Todos los campos son requeridos" },
         { status: 400 }
@@ -20,10 +20,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const existingUser = await prisma.user.findUnique({ where: { email } });
+    const existingUser = await prisma.user.findUnique({
+      where: { documento },
+    });
     if (existingUser) {
       return NextResponse.json(
-        { error: "Ya existe un usuario con ese email" },
+        { error: "Ya existe un usuario con ese numero de documento" },
         { status: 409 }
       );
     }
@@ -31,7 +33,7 @@ export async function POST(req: Request) {
     const hashedPassword = await hash(password, 12);
 
     const user = await prisma.user.create({
-      data: { name, email, password: hashedPassword },
+      data: { name, documento, password: hashedPassword },
     });
 
     return NextResponse.json(
